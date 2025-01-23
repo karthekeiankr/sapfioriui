@@ -1,0 +1,28 @@
+<mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="project2.project2.controller.View1"
+    displayBlock="true">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <!-- SmartFilterBar -->
+            <smartfilterbar:SmartFilterBar
+                id="idsmartfilterbar"
+                entitySet="I_PlantType"
+                persistencyKey="SmartFilter_Explored"
+                enableBasicSearch="true">
+            </smartfilterbar:SmartFilterBar>
+            <!-- SmartTable -->
+            <smarttable:SmartTable
+                id="idsmarttable"
+                useExportToExcel="false"
+                smartFilterId="idsmartfilterbar"
+                entitySet="I_Plant"
+                enableAutoBinding="true"
+                showRowCount="true"
+                tableType="ResponsiveTable">
+            </smarttable:SmartTable>
+        </content>
+    </Page>
+</mvc:View>

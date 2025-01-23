@@ -1,0 +1,228 @@
+{
+    "_version": "1.22.0",
+    "sap.app": {
+        "id": "project7",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:ovp",
+            "version": "1.16.1",
+            "toolsId": "738e546d-3780-40fe-a267-ef3602331fbd"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZCDSSELECTIONFIELDS/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation",
+                        "annotation1",
+                        "annotation2",
+                        "ZCDSSELECTIONFIELDS_VAN"
+                    ],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZCDSSELECTIONFIELDS_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCDSSELECTIONFIELDS_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/mainService/ZCDSSELECTIONFIELDS_VAN.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            },
+            "Z_BASICVIEW_Annotation": {
+                "uri": "/destinations/Dev/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='Z_BASICVIEW_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/Z_BASICVIEW/Z_BASICVIEW_Annotation.xml"
+                }
+            },
+            "Z_BASICVIEW": {
+                "uri": "/sap/opu/odata/sap/Z_BASICVIEW",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation3",
+                        "Z_BASICVIEW_Annotation",
+                        "annotation5"
+                    ],
+                    "localUri": "localService/Z_BASICVIEW/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation1": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation1.xml",
+                "settings": {
+                    "localUri": "annotations/annotation1.xml"
+                }
+            },
+            "annotation2": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation2.xml",
+                "settings": {
+                    "localUri": "annotations/annotation2.xml"
+                }
+            },
+            "annotation3": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation3.xml",
+                "settings": {
+                    "localUri": "annotations/annotation3.xml"
+                }
+            },
+            "annotation5": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation5.xml",
+                "settings": {
+                    "localUri": "annotations/annotation5.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.78.9",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.f": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ovp": {},
+                "sap.ui.rta": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "project7.i18n.i18n"
+                }
+            },
+            "mainModel": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "Z_BASICVIEW": {
+                "dataSource": "Z_BASICVIEW",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [],
+            "targets": {}
+        }
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainModel",
+        "globalFilterEntityType": "ZCDS_SelectionFieldsType",
+        "containerLayout": "resizable",
+        "enableLiveFilter": true,
+        "considerAnalyticalParameters": false,
+        "cards": {
+            "chart1": {
+                "template": "sap.ovp.cards.charts.analytical",
+                "model": "mainModel",
+                "settings": {
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#chart1",
+                    "valueSelectionInfo": "chart1",
+                    "entitySet": "ZCDS_SelectionFields",
+                    "title": "{i18n>chart1}",
+                    "subTitle": "{i18n>chart1}",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#chart1",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#chart1"
+                }
+            },
+            "chart2": {
+                "template": "sap.ovp.cards.charts.analytical",
+                "model": "Z_BASICVIEW",
+                "settings": {
+                    "entitySet": "Z_BASIC_VIEW",
+                    "title": "{i18n>chart2}",
+                    "sortBy": "REPLACE_WITH_SORT_BY_TYPE",
+                    "sortOrder": "ascending",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#chart2",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#chart2"
+                }
+            },
+            "chart3": {
+                "template": "sap.ovp.cards.list",
+                "model": "mainModel",
+                "settings": {
+                    "listFlavor": "bar",
+                    "listType": "extended",
+                    "entitySet": "ZCDS_SelectionFields",
+                    "title": "chart3",
+                    "tabs": [
+                        {}
+                    ],
+                    "sortBy": "Id",
+                    "sortOrder": "ascending"
+                }
+            }
+        },
+        "chartSettings": {}
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    }
+}

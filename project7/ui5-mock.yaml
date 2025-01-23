@@ -1,0 +1,65 @@
+specVersion: "3.1"
+metadata:
+  name: project7
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - scp: true
+            path: /sap
+            url: https://dev.dest
+            destination: Dev
+          - path: /sap/opu/odata/sap/Z_BASICVIEW
+            url: http://192.168.1.25:8011
+            destination: Dev
+            authenticationType: NoAuthentication
+          - path: /sap/opu/odata/sap/ZCDSSELECTIONFIELDS
+            url: http://192.168.1.25:8011
+            destination: Dev
+            authenticationType: NoAuthentication
+          - path: /sap/opu/odata/sap/ZCDSSELECTIONFIELDS
+            url: http://192.168.1.25:8011
+            destination: Dev
+            authenticationType: NoAuthentication
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: project7
+        ui5Theme: sap_fiori_3
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - metadataXmlPath: ./webapp/localService/mainService/metadata.xml
+            mockdataRootPath: ./webapp/localService/mainService/mockdata
+          - urlPath: /sap/opu/odata/sap/ZCDSSELECTIONFIELDS
+            metadataPath: ./webapp/localService/ZCDSSELECTIONFIELDS/metadata.xml
+            mockdataPath: ./webapp/localService/ZCDSSELECTIONFIELDS/mockdata
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/mainService/ZCDSSELECTIONFIELDS_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCDSSELECTIONFIELDS_VAN',Version='0001')/$value/
+          - localPath: ./webapp/annotations/annotation.xml
+            urlPath: annotations/annotation.xml
+          - localPath: ./webapp/annotations/annotation1.xml
+            urlPath: annotations/annotation1.xml
+          - localPath: ./webapp/annotations/annotation2.xml
+            urlPath: annotations/annotation2.xml
+          - localPath: ./webapp/localService/ZCDSSELECTIONFIELDS/ZCDSSELECTIONFIELDS_Annotation.xml
+            urlPath: /destinations/Dev/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCDSSELECTIONFIELDS_VAN',Version='0001')/$value/

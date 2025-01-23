@@ -1,0 +1,65 @@
+specVersion: "3.1"
+metadata:
+  name: project7
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - scp: true
+            path: /sap
+            url: https://dev.dest
+            destination: Dev
+          - path: /sap/opu/odata/sap/Z_BASICVIEW
+            url: http://192.168.1.25:8011
+            destination: Dev
+            authenticationType: NoAuthentication
+          - path: /sap/opu/odata/sap/Z_BASIC_VIEW_5
+            url: http://192.168.1.25:8011
+            destination: Dev
+            authenticationType: NoAuthentication
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: project7
+        ui5Theme: sap_fiori_3
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata/sap/ZCDSSELECTIONFIELDS
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/mainService/metadata.xml
+            mockdataRootPath: ./webapp/localService/data
+          - urlPath: /sap/opu/odata/sap/Z_BASICVIEW
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/Z_BASICVIEW/metadata.xml
+            mockdataRootPath: ./webapp/localService/Z_BASICVIEW/mockdata
+        annotations:
+          - localPath: ./webapp/localService/mainService/ZCDSSELECTIONFIELDS_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCDSSELECTIONFIELDS_VAN',Version='0001')/$value/
+          - localPath: ./webapp/annotations/annotation.xml
+            urlPath: annotations/annotation.xml
+          - localPath: ./webapp/localService/Z_BASICVIEW/Z_BASICVIEW_Annotation.xml
+            urlPath: /destinations/Dev/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='Z_BASICVIEW_VAN',Version='0001')/$value/
+          - localPath: ./webapp/annotations/annotation1.xml
+            urlPath: annotations/annotation1.xml
+          - localPath: ./webapp/annotations/annotation2.xml
+            urlPath: annotations/annotation2.xml
+          - localPath: ./webapp/localService/Z_BASIC_VIEW_5/Z_BASIC_VIEW_5_Annotation.xml
+            urlPath: /destinations/Dev/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='Z_BASIC_VIEW_5_VAN',Version='0001')/$value/

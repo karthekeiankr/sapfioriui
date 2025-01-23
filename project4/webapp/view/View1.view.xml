@@ -1,0 +1,49 @@
+<mvc:View
+    controllerName="project4.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m">b
+    <Page id="page" title="{i18n>title}">
+        <content>b
+            <!-- Table to display materials -->
+            <Table id="materialTable" mode="MultiSelect" inset="true" items="{jsonModel>/Materials}">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Material List" />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="ID" />
+                    </Column>
+                    <Column>
+                        <Text text="Material name" />
+                    </Column>
+                    <Column>
+                        <Text text="Material Description" />
+                    </Column>
+                    <Column>
+                        <Text text="Quantity" />
+                    </Column>
+                    <Column>
+                        <Text text="City" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{jsonModel>Id}" />
+                            <Text text="{jsonModel>Material_Name}" />
+                            <Text text="{jsonModel>Material_Des}" />
+                            <Text text="{jsonModel>Quantity}" />
+                            <Text text="{jsonModel>City}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <!-- Button to send data to backend -->
+            <Button text="Send to Backend" press="onSendToBackend" />
+        </content>
+    </Page>
+</mvc:View>
+ 

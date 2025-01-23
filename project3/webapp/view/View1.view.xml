@@ -1,0 +1,41 @@
+<mvc:View controllerName="project3.controller.View1"
+xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+        <smartfilterbar:SmartFilterBar id="smartfilterbar"
+                                       enableBasicSearch="true"
+                                       filterBarExpanded="true"
+                                       useToolbar="true"
+                                       entitySet="laptopsSet" />
+       
+        <!-- Button to delete selected rows -->
+        <Button text="Delete Selected Row" press="onDeleteRow" />
+ 
+        <!-- SmartTable with Multi Selection and row click navigation -->
+        <smarttable:SmartTable id="smarttable"
+                               entitySet="laptopsSet"
+                                useExportToExcel="false"
+                               enableAutoBinding="true"
+                               smartFilterId="smartfilterbar"
+                              >
+            <Table
+                mode="MultiSelect"
+                includeItemInSelection="false"> <!-- Ensures checkbox selection -->
+                <items>
+                    <ColumnListItem type="Active" press="onRowPress"> <!-- Enable row click -->
+                        <cells>
+                            <Text text="{Id}" />
+                            <Text text="{Material_Name}" />
+                            <Text text="{Material_Des}" />
+                            <Text text="{Quantity}" />
+                            <Text text="{City}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </smarttable:SmartTable>
+    </Page>
+</mvc:View>

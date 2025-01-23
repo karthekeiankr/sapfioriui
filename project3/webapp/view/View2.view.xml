@@ -1,0 +1,75 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.uxap"
+          xmlns:m="sap.m"
+          xmlns:table="sap.ui.table"
+          xmlns:core="sap.ui.core"
+          controllerName="project3.controller.View2"
+          height="100%">
+    <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageHeader objectImageURI="{ImageUri}" objectTitle="{Id}">
+            </ObjectPageHeader>
+        </headerTitle>
+        <headerContent>
+            <m:ObjectAttribute text="Material Description: {Material_Des}" />
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection title="General Information" titleUppercase="false">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:Text text="Material Description: {Material_Des}" />
+                            <m:Text text="Material Name: {Material_Name}" />
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+             <ObjectPageSection title="Material Details">
+                <subSections>
+                    <ObjectPageSubSection title="Material Table">
+                        <blocks>
+                            <table:Table rows="{/laptopsSet}" rowSelectionChange="onRowPress" >
+                                <table:columns  >
+                                  <table:Column >
+                                        <table:label>
+                                            <m:Label text="City"/>
+                                        </table:label>
+                                        <table:template>
+                                            <m:Text text="{City}"/>
+                                        </table:template>
+                                    </table:Column>
+                                      <table:Column>
+                                        <table:label>
+                                            <m:Label text="Material Name"/>
+                                        </table:label>
+                                        <table:template>
+                                            <m:Text text="{Material_Name}"/>
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column>
+                                        <table:label>
+                                            <m:Label text="Material Description"/>
+                                        </table:label>
+                                        <table:template>
+                                            <m:Text text="{Material_Des}"/>
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column>
+                                        <table:label>
+                                            <m:Label text="Quantity"/>
+                                        </table:label>
+                                        <table:template>
+                                            <m:Text text="{Quantity}"/>
+                                        </table:template>
+                                    </table:Column>
+                                </table:columns>
+                            </table:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

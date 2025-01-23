@@ -1,0 +1,41 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+            <Annotations Target="cds_zcds_selectionfield.ZCDS_SelectionFieldsType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <!-- Other Fields -->
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="City"/>
+                            <PropertyValue Property="Value" Path="City"/>
+                            <PropertyValue Property="Criticality" Path="CityCriticality"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Criticality">
+                    <Record>
+                        <PropertyValue Property="ValueMapping">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Value" String="New York"/>
+                                    <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Value" String="London"/>
+                                    <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Value" String="Berlin"/>
+                                    <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
